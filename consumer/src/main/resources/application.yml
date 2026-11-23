@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: tradestream-consumer
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: tradestream-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.tradestream.*"
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/tradestream}
+    username: ${DATABASE_USER:tradestream}
+    password: ${DATABASE_PASSWORD:tradestream}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+kafka:
+  topics:
+    trade-events: trade-events
+    order-fills: order-fills
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+logging:
+  level:
+    com.tradestream: INFO

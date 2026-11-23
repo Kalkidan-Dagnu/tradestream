@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "feat/**", "fix/**", "chore/**"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+
+  # ── Producer (Java) ────────────────────────────────────────────
+  producer:
+    name: Producer Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: maven
+
+      - name: Build & test
+        working-directory: producer
+        run: mvn verify -B
+
+  # ── Consumer (Java) ────────────────────────────────────────────
+  consumer:
+    name: Consumer Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: temurin
+          cache: maven
+
+      - name: Build & test
+        working-directory: consumer
+        run: mvn verify -B
+
+  # ── Frontend (Node) ────────────────────────────────────────────
+  frontend:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package.json
+
+      - name: Install & build
+        working-directory: frontend
+        run: |
+          npm install
+          npm run build
