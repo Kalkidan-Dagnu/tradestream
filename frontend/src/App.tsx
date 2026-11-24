@@ -1,6 +1,7 @@
 import ConnectionBadge from './components/ConnectionBadge'
 import Layout from './components/Layout'
 import OrderFeed from './components/OrderFeed'
+import PositionTable from './components/PositionTable'
 import { useTradeStream } from './hooks/useTradeStream'
 
 export default function App() {
@@ -20,9 +21,9 @@ export default function App() {
           <OrderFeed trades={trades} />
         </div>
 
-        {/* Position table — coming in next feature */}
-        <div className="xl:col-span-3 bg-gray-900 rounded-xl border border-gray-800 p-5 min-h-48 flex items-center justify-center text-gray-600">
-          Position Table — coming soon ({positions.size} positions)
+        {/* Position table */}
+        <div className="xl:col-span-3 bg-gray-900 rounded-xl border border-gray-800 p-5">
+          <PositionTable positions={positions} />
         </div>
 
       </div>
