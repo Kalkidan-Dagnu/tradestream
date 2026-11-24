@@ -1,11 +1,27 @@
-function App() {
+import Layout from './components/Layout'
+
+export default function App() {
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-8">
-      <h1 className="text-3xl font-bold text-green-400">TradeStream</h1>
-      <p className="mt-2 text-gray-400">Real-time crypto copy-trading dashboard</p>
-      {/* Components will be added in the frontend implementation phase */}
-    </div>
+    <Layout>
+      {/* Dashboard grid — components will be filled in subsequent features */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+        {/* Top row: P&L chart spans 2 columns */}
+        <div className="xl:col-span-2 bg-gray-900 rounded-xl border border-gray-800 p-5 min-h-64 flex items-center justify-center text-gray-600">
+          PnL Chart — coming soon
+        </div>
+
+        {/* Top right: Order feed */}
+        <div className="bg-gray-900 rounded-xl border border-gray-800 p-5 min-h-64 flex items-center justify-center text-gray-600">
+          Order Feed — coming soon
+        </div>
+
+        {/* Bottom: Position table spans full width */}
+        <div className="xl:col-span-3 bg-gray-900 rounded-xl border border-gray-800 p-5 min-h-48 flex items-center justify-center text-gray-600">
+          Position Table — coming soon
+        </div>
+
+      </div>
+    </Layout>
   )
 }
-
-export default App
