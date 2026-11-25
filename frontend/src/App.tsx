@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import AlertBanner from './components/AlertBanner'
 import ConnectionBadge from './components/ConnectionBadge'
 import Layout from './components/Layout'
 import OrderFeed from './components/OrderFeed'
@@ -53,6 +54,9 @@ export default function App() {
         </div>
 
       </div>
+
+      {/* Fixed bottom-right alert overlay */}
+      <AlertBanner positions={positions} pnlThreshold={-100} />
     </Layout>
   )
 }
